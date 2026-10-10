@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     libgbm1 \
     libasound2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libpangoft2-1.0-0 \
+    libcairo2 \
+    libfontconfig1 \
+    libdbus-1-3 \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 

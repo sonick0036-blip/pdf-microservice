@@ -8,7 +8,7 @@ let browser;
 async function getBrowser() {
   if (!browser) {
     browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
     });
   }
   return browser;
@@ -26,10 +26,12 @@ app.post('/generate-pdf', async (req, res) => {
     res.contentType('application/pdf');
     res.send(pdfBuffer);
   } catch (err) {
-    console.error(err);
+    console.error("Puppeteer error:", err);
     res.status(500).send(err.toString());
   }
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`);
+});
